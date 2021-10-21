@@ -3,13 +3,17 @@ const express = require('express') //импорт модуля express
 const sequelize = require('./db') //импорт объекта из файла db
 const models = require('./models/models') //создание базы данных
 const cors = require('cors')
+const fileUpload = require('express-fileupload')
 const router = require('./routes/index')
 const errorHandler = require('./middleware/ErrorHandlingMiddleware') //!!идёт и регистрируется в самом конце
+const path = require('path')
 const PORT = process.env.PORT || 5000 //порт, где будет работать приложение
 
 const app = express() //объект запуска приложения
 app.use(cors())
 app.use(express.json()) //приложение могло парсить json формат
+app.use(express.static(path.resolve(__dirname, 'static', ))) //обращение ко всем файлам из static
+app.use(fileUpload({})) //загрузка изображений в интернет-магазин
 app.use('/api', router)
 
 //замыкающий

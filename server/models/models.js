@@ -62,7 +62,7 @@ Rating.belongsTo(Device)
 Device.hasMany(BasketDevice)
 BasketDevice.belongsTo(Device)
 
-Device.hasMany(DeviceInfo) //одна запись девайса в базе данных содержит много записей с характеристиками
+Device.hasMany(DeviceInfo, {as: 'info'}) //одна запись девайса в базе данных содержит много записей с характеристиками
 DeviceInfo.belongsTo(Device) //сия сущность принадлежит Device
 
 Type.belongsToMany(Brand, {through: TypeBrand})
